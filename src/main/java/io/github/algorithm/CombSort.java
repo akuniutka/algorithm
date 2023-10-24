@@ -11,13 +11,7 @@ public class CombSort {
                 }
             }
         } while (shift > 1);
-        for (int iteration = 1; iteration < array.length; ++iteration) {
-            for (int j = 0; j < array.length - iteration; ++j) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-                }
-            }
-        }
+        (new BubbleSort()).sort(array);
     }
 
     private void swap(int[] array, int i, int j) {
