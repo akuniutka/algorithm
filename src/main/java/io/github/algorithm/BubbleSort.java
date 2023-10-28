@@ -2,17 +2,17 @@ package io.github.algorithm;
 
 public class BubbleSort {
     public void sort(int[] array) {
-        for (int iteration = 1; iteration < array.length; ++iteration) {
-            boolean wasSwap = false;
-            for (int i = 0; i < array.length - iteration; ++i) {
-                if (array[i + 1] < array[i]) {
+        int lastToCheck = array.length - 2;
+        int lastSwapped;
+        while (lastToCheck >= 0) {
+            lastSwapped = 0;
+            for (int i = 0; i <= lastToCheck; ++i) {
+                if (array[i] > array[i + 1]) {
                     swap(array, i, i + 1);
-                    wasSwap = true;
+                    lastSwapped = i + 1;
                 }
             }
-            if (!wasSwap) {
-                return;
-            }
+            lastToCheck = lastSwapped - 2;
         }
     }
 
