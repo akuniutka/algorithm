@@ -1,4 +1,4 @@
-package io.github.algorithm;
+package io.github.akuniutka.algorithm;
 
 import java.util.Random;
 

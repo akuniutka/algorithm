@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.algorithm</groupId>
+    <groupId>io.github.akuniutka.algorithm</groupId>
     <artifactId>sort</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>Sorting Algorithms</name>
+    <description>A package with different sorting algorithms</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
