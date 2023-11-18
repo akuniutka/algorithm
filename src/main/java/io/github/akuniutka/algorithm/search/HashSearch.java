@@ -17,8 +17,8 @@ public class HashSearch extends AbstractSearch {
      * Returns the position of the first occurrence of {@code substring}
      * within {@code string}.
      *
-     * @param substring  the string being searched for
-     * @param string     the string tested whether it contains {@code substring}
+     * @param substring the string being searched for
+     * @param string    the string tested whether it contains {@code substring}
      * @return index in {@code string} where {@code substring} starts or
      * {@code -1} if there is no such {@code substring} within {@code string} or
      * {@code substring} is {@code null}
@@ -31,24 +31,21 @@ public class HashSearch extends AbstractSearch {
         } else if (string.length() == substring.length()) {
             return areEqual(string, substring) ? 0 : -1;
         }
-        long multiplier = power(FACTOR, substring.length() - 1);
-        int hashA = 0, hashB = 0;
-        for (int i = 0; i < substring.length(); ++i) {
-            hashA = recalculateHash(hashA, 0, substring.charAt(i));
-            hashB = recalculateHash(hashB, 0, string.charAt(i));
-        }
-        if (hashA == hashB && areEqual(substring, string.substring(0, substring.length()))) {
-            return 0;
-        }
-        for (int i = substring.length(); i < string.length(); ++i) {
-            hashB = recalculateHash(hashB,
-                    string.charAt(i - substring.length()) * multiplier,
-                    string.charAt(i));
-            if (hashA == hashB && areEqual(substring, string.substring(i - substring.length() + 1, i + 1))) {
-                return i - substring.length() + 1;
+        int l = 1, r = substring.length();
+        long f = power(FACTOR, r - 1);
+        int hashA = calculateHash(substring);
+        int hashB = calculateHash(string.substring(l, r + 1));
+        while (true) {
+            if (hashA == hashB) {
+                if (areEqual(substring, string.substring(l, r + 1))) {
+                    return l;
+                }
             }
+            if (++r == string.length()) {
+                return -1;
+            }
+            hashB = recalculateHash(hashB, string.charAt(l++), string.charAt(r), f);
         }
-        return -1;
     }
 
     private static long power(int a, int power) {
@@ -65,7 +62,15 @@ public class HashSearch extends AbstractSearch {
         return z;
     }
 
-    private static int recalculateHash(int previousValue, long toSubtract, char toAdd) {
-        return (int) ((previousValue - toSubtract) * FACTOR + toAdd) % BASE;
+    private static int calculateHash(String s) {
+        long hash = 0L;
+        for (int i = 0; i < s.length(); ++i) {
+            hash = (hash * FACTOR + s.charAt(i)) % BASE;
+        }
+        return (int) hash;
+    }
+
+    private static int recalculateHash(int previousValue, char subtract, char add, long factor) {
+        return (int) ((previousValue - subtract * factor) * FACTOR + add) % BASE;
     }
 }
