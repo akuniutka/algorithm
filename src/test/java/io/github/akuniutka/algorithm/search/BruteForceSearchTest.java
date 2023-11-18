@@ -56,6 +56,21 @@ class BruteForceSearchTest {
     }
 
     @Test
+    void testIndexOfWhenStringStartsWithSubstring() {
+        assertEquals(0, BruteForceSearch.indexOf("sad", "sad very sad"));
+    }
+
+    @Test
+    void testIndexOfWhenStringEndsWithSubstring() {
+        assertEquals(10, BruteForceSearch.indexOf("sad", "happy but sad"));
+    }
+
+    @Test
+    void testIndexOfWhenSubstringIsVeryLong() {
+        assertEquals(9, BruteForceSearch.indexOf("teleports", "teleport teleports"));
+    }
+
+    @Test
     void testIndexOfWhenStringContainsSubstring() {
         assertEquals(6, BruteForceSearch.indexOf("sad", "it is sad but true"));
     }

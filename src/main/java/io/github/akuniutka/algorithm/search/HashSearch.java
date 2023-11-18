@@ -26,25 +26,26 @@ public class HashSearch extends AbstractSearch {
     public static int indexOf(String substring, String string) {
         if (substring == null || string == null || substring.isEmpty()) {
             return -1;
-        } else if (substring.length() > string.length()) {
-            return -1;
-        } else if (string.length() == substring.length()) {
-            return areEqual(string, substring) ? 0 : -1;
         }
-        int l = 1, r = substring.length();
-        long f = power(FACTOR, r - 1);
-        int hashA = calculateHash(substring);
-        int hashB = calculateHash(string.substring(l, r + 1));
+        int n = substring.length();
+        if (n > string.length()) {
+            return -1;
+        } else if (n == string.length()) {
+            return areEqual(substring, string) ? 0 : -1;
+        }
+        int i = n;
+        Hash hash1 = new Hash(substring);
+        Hash hash2 = new Hash(string.substring(0, i));
         while (true) {
-            if (hashA == hashB) {
-                if (areEqual(substring, string.substring(l, r + 1))) {
-                    return l;
+            if (hash1.equals(hash2)) {
+                if (areEqual(substring, string.substring(i - n, i))) {
+                    return i - n;
                 }
             }
-            if (++r == string.length()) {
+            if (i == string.length()) {
                 return -1;
             }
-            hashB = recalculateHash(hashB, string.charAt(l++), string.charAt(r), f);
+            hash2.update(string.charAt(i++));
         }
     }
 
@@ -62,15 +63,34 @@ public class HashSearch extends AbstractSearch {
         return z;
     }
 
-    private static int calculateHash(String s) {
-        long hash = 0L;
-        for (int i = 0; i < s.length(); ++i) {
-            hash = (hash * FACTOR + s.charAt(i)) % BASE;
-        }
-        return (int) hash;
-    }
+    private static class Hash {
+        private final char[] buffer;
+        private final long multiplicand;
+        private int current;
+        private long value;
 
-    private static int recalculateHash(int previousValue, char subtract, char add, long factor) {
-        return (int) ((previousValue - subtract * factor) * FACTOR + add) % BASE;
+        Hash(String s) {
+            this.buffer = s.toCharArray();
+            for (int i = 0; i < buffer.length; ++i) {
+                value = (value * FACTOR + s.charAt(i)) % BASE;
+            }
+            this.multiplicand = power(FACTOR, buffer.length - 1);
+        }
+
+        void update(char ch) {
+            value -= (buffer[current] * multiplicand) % BASE;
+            if (value < 0) {
+                value += BASE;
+            }
+            value = (value * FACTOR + ch) % BASE;
+            buffer[current++] = ch;
+            if (current == buffer.length) {
+                current = 0;
+            }
+        }
+
+        boolean equals(Hash hash) {
+            return this.value == hash.value;
+        }
     }
 }

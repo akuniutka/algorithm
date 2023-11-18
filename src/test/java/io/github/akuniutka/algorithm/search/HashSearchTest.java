@@ -56,6 +56,21 @@ class HashSearchTest {
     }
 
     @Test
+    void testIndexOfWhenStringStartsWithSubstring() {
+        assertEquals(0, HashSearch.indexOf("sad", "sad very sad"));
+    }
+
+    @Test
+    void testIndexOfWhenStringEndsWithSubstring() {
+        assertEquals(10, HashSearch.indexOf("sad", "happy but sad"));
+    }
+
+    @Test
+    void testIndexOfWhenSubstringIsVeryLong() {
+        assertEquals(9, HashSearch.indexOf("teleports", "teleport teleports"));
+    }
+
+    @Test
     void testIndexOfWhenStringContainsSubstring() {
         assertEquals(6, HashSearch.indexOf("sad", "it is sad but true"));
     }
