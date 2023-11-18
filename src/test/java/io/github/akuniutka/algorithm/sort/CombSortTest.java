@@ -1,4 +1,4 @@
-package io.github.akuniutka.algorithm;
+package io.github.akuniutka.algorithm.sort;
 
 import org.junit.jupiter.api.RepeatedTest;
 

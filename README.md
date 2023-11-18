@@ -1,1 +1,1 @@
-Implementations of different sorting algorithms.
+Implementations of different sorting and searching algorithms.

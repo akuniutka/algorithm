@@ -1,4 +1,4 @@
-package io.github.akuniutka.algorithm;
+package io.github.akuniutka.algorithm.sort;
 
 public class CombSort {
     public void sort(int[] array) {

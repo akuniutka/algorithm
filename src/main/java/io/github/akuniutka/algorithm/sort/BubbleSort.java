@@ -1,4 +1,4 @@
-package io.github.akuniutka.algorithm;
+package io.github.akuniutka.algorithm.sort;
 
 public class BubbleSort {
     public void sort(int[] array) {
