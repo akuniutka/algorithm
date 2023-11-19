@@ -10,8 +10,6 @@ package io.github.akuniutka.algorithm.search;
  * @since 1.0
  */
 public class HashSearch extends AbstractSearch {
-    private static final int BASE = 1_000_000_000 + 7;
-    private static final int FACTOR = 13;
 
     /**
      * Returns the position of the first occurrence of {@code substring}
@@ -27,70 +25,98 @@ public class HashSearch extends AbstractSearch {
         if (substring == null || string == null || substring.isEmpty()) {
             return -1;
         }
-        int n = substring.length();
-        if (n > string.length()) {
+        if (substring.length() > string.length()) {
             return -1;
-        } else if (n == string.length()) {
+        } else if (substring.length() == string.length()) {
             return areEqual(substring, string) ? 0 : -1;
         }
-        int i = n;
-        Hash hash1 = new Hash(substring);
-        Hash hash2 = new Hash(string.substring(0, i));
+        Substring sub1 = new Substring(substring);
+        Substring sub2 = new Substring(string, substring.length());
         while (true) {
-            if (hash1.equals(hash2)) {
-                if (areEqual(substring, string.substring(i - n, i))) {
-                    return i - n;
-                }
-            }
-            if (i == string.length()) {
+            if (sub2.equals(sub1)) {
+                return sub2.getOffset();
+            } else if (!sub2.canSlideToRight()) {
                 return -1;
             }
-            hash2.update(string.charAt(i++));
+            sub2.slideToRight();
         }
     }
 
-    private static long power(int a, int power) {
-        if (power == 0) {
-            return 1;
-        } else if (power == 1) {
-            return a;
-        }
-        long z = power(a, power / 2);
-        z = (z * z) % BASE;
-        if (power % 2 == 1) {
-            z = (z * a) % BASE;
-        }
-        return z;
-    }
-
-    private static class Hash {
-        private final char[] buffer;
+    private static class Substring {
+        private static final int BASE = 1_000_000_000 + 7;
+        private static final int FACTOR = 13;
+        private final String string;
+        private final int length;
+        private final int maxOffset;
         private final long multiplicand;
-        private int current;
-        private long value;
+        private int offset;
+        private long hash;
 
-        Hash(String s) {
-            this.buffer = s.toCharArray();
-            for (int i = 0; i < buffer.length; ++i) {
-                value = (value * FACTOR + s.charAt(i)) % BASE;
-            }
-            this.multiplicand = power(FACTOR, buffer.length - 1);
+        Substring(String string) {
+            this(string, string.length());
         }
 
-        void update(char ch) {
-            value -= (buffer[current] * multiplicand) % BASE;
-            if (value < 0) {
-                value += BASE;
+        Substring(String string, int n) {
+            if (string.length() < n) {
+                throw new IllegalArgumentException("n exceeds string length");
             }
-            value = (value * FACTOR + ch) % BASE;
-            buffer[current++] = ch;
-            if (current == buffer.length) {
-                current = 0;
+            this.string = string;
+            length = n;
+            maxOffset = string.length() - n;
+            for (int i = 0; i < length; ++i) {
+                hash = (hash * FACTOR + string.charAt(i)) % BASE;
             }
+            multiplicand = power(FACTOR, length - 1);
         }
 
-        boolean equals(Hash hash) {
-            return this.value == hash.value;
+        int getOffset() {
+            return offset;
+        }
+
+        char charAt(int index) {
+            return string.charAt(offset + index);
+        }
+
+        boolean canSlideToRight() {
+            return offset != maxOffset;
+        }
+
+        void slideToRight() {
+            if (offset == maxOffset) {
+                throw new IndexOutOfBoundsException("offset will exceed maximum value");
+            }
+            hash -= (charAt(0) * multiplicand) % BASE;
+            if (hash < 0) {
+                hash += BASE;
+            }
+            hash = (hash * FACTOR + charAt(length)) % BASE;
+            ++offset;
+        }
+
+        boolean equals(Substring substring) {
+            if (length != substring.length || hash != substring.hash) {
+                return false;
+            }
+            for (int i = 0; i < length; ++i) {
+                if (charAt(i) != substring.charAt(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private long power(int a, int power) {
+            if (power == 0) {
+                return 1;
+            } else if (power == 1) {
+                return a;
+            }
+            long z = power(a, power / 2);
+            z = (z * z) % BASE;
+            if (power % 2 == 1) {
+                z = (z * a) % BASE;
+            }
+            return z;
         }
     }
 }
