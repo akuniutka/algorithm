@@ -8,7 +8,7 @@ package io.github.akuniutka.algorithm.search;
  * @version 1.0
  * @since 1.0
  */
-public class BruteForceSearch extends AbstractSearch {
+public class SequentialSearch extends AbstractSearch {
     /**
      * Returns the position of the first occurrence of {@code substring}
      * within {@code string}.
