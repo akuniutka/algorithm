@@ -8,7 +8,7 @@ package io.github.akuniutka.algorithm.search;
  * @version 1.0
  * @since 1.0
  */
-public class SequentialSearch extends AbstractSearch {
+public class SequentialSearch {
     /**
      * Returns the position of the first occurrence of {@code substring}
      * within {@code string}.
@@ -24,10 +24,12 @@ public class SequentialSearch extends AbstractSearch {
             return -1;
         }
         for (int i = 0; i <= string.length() - substring.length(); ++i) {
-            if (string.charAt(i) == substring.charAt(0)) {
-                if (areEqual(substring, string.substring(i, i + substring.length()))) {
-                    return i;
-                }
+            int j = 0;
+            while (j < substring.length() && substring.charAt(j) == string.charAt(i + j)) {
+                ++j;
+            }
+            if (j == substring.length()) {
+                return i;
             }
         }
         return -1;
