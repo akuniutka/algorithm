@@ -60,25 +60,29 @@ public class RabinKarpSearch {
         private final String string;
         private final int length;
         private final int maxOffset;
-        private final long multiplicand;
+        private long multiplicand;
         private int offset;
         private long hash;
 
         Substring(String string) {
-            this(string, string.length());
+            this(string, string == null ? -1 : string.length());
         }
 
         Substring(String string, int n) {
-            if (string.length() < n) {
+            if (string == null) {
+                throw new IllegalArgumentException("string is null");
+            } else if (string.length() < n) {
                 throw new IllegalArgumentException("n exceeds string length");
             }
             this.string = string;
             length = n;
-            maxOffset = string.length() - n;
+            maxOffset = string.length() - length;
+            if (maxOffset > 0) {
+                multiplicand = power(FACTOR, length - 1);
+            }
             for (int i = 0; i < length; ++i) {
                 hash = (hash * FACTOR + string.charAt(i)) % BASE;
             }
-            multiplicand = power(FACTOR, length - 1);
         }
 
         int getOffset() {
@@ -106,7 +110,7 @@ public class RabinKarpSearch {
         }
 
         boolean equals(Substring substring) {
-            if (length != substring.length || hash != substring.hash) {
+            if (substring == null || length != substring.length || hash != substring.hash) {
                 return false;
             }
             for (int i = 0; i < length; ++i) {
