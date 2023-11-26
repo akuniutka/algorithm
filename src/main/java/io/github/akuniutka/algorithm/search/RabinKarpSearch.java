@@ -1,15 +1,15 @@
 package io.github.akuniutka.algorithm.search;
 
 /**
- * Provides a faster-than-naive method for searching a substring within
- * a given string by comparing hashes of character sequences instead of
- * character-by-character comparison.
+ * Provides a faster-than-naive method for substring search by
+ * <a href="https://en.wikipedia.org/wiki/Rabin%2DKarp_algorithm">
+ * the Rabin-Karp algorithm</a>.
  *
  * @author Andrei Kuniutka
  * @version 1.0
  * @since 1.0
  */
-public class HashSearch {
+public class RabinKarpSearch {
 
     /**
      * Returns the position of the first occurrence of {@code substring}
