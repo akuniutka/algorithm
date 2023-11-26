@@ -1,8 +1,8 @@
 package io.github.akuniutka.algorithm.search;
 
 /**
- * Provides a naive method for searching a substring within a given string
- * by using character-by-character comparison.
+ * Provides a naive method for substring search by character-by-character
+ * comparison.
  *
  * @author Andrei Kuniutka
  * @version 1.0
