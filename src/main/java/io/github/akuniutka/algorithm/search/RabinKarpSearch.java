@@ -12,46 +12,33 @@ package io.github.akuniutka.algorithm.search;
 public class RabinKarpSearch {
 
     /**
-     * Returns the position of the first occurrence of {@code substring}
-     * within {@code string}.
+     * Returns the index within {@code string} of the first occurrence of
+     * {@code substring}.
      *
      * @param substring the string being searched for
      * @param string    the string tested whether it contains {@code substring}
-     * @return index in {@code string} where {@code substring} starts or
-     * {@code -1} if there is no such {@code substring} within {@code string} or
-     * {@code substring} is {@code null}
+     * @return the index of the first occurrence of {@code substring}, or
+     * {@code -1} if there is no such occurrence.
      */
     public static int indexOf(String substring, String string) {
         if (substring == null || string == null || substring.isEmpty()) {
             return -1;
-        }
-        if (substring.length() > string.length()) {
+        } else if (substring.length() > string.length()) {
             return -1;
-        } else if (substring.length() == string.length()) {
-            return areEqual(substring, string) ? 0 : -1;
         }
         Substring sub1 = new Substring(substring);
         Substring sub2 = new Substring(string, substring.length());
         while (true) {
-            if (sub2.equals(sub1)) {
-                return sub2.getOffset();
-            } else if (!sub2.canSlideToRight()) {
+            if (sub1.getHash() == sub2.getHash()) {
+                if (sub2.equals(sub1)) {
+                    return sub2.getOffset();
+                }
+            }
+            if (!sub2.canSlideToRight()) {
                 return -1;
             }
             sub2.slideToRight();
         }
-    }
-
-    private static boolean areEqual(String s1, String s2) {
-        if (s1 == null || s2 == null || s1.length() != s2.length()) {
-            return false;
-        }
-        for (int i = 0; i < s1.length(); ++i) {
-            if (s1.charAt(i) != s2.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private static class Substring {
@@ -93,6 +80,10 @@ public class RabinKarpSearch {
             return string.charAt(offset + index);
         }
 
+        long getHash() {
+            return hash;
+        }
+
         boolean canSlideToRight() {
             return offset != maxOffset;
         }
@@ -110,15 +101,14 @@ public class RabinKarpSearch {
         }
 
         boolean equals(Substring substring) {
-            if (substring == null || length != substring.length || hash != substring.hash) {
+            if (substring == null || length != substring.length) {
                 return false;
             }
-            for (int i = 0; i < length; ++i) {
-                if (charAt(i) != substring.charAt(i)) {
-                    return false;
-                }
+            int i = 0;
+            while (i < length && charAt(i) == substring.charAt(i)) {
+                ++i;
             }
-            return true;
+            return i == length;
         }
 
         private long power(int a, int power) {
