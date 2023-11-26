@@ -55,8 +55,8 @@ public class RabinKarpSearch {
     }
 
     private static class Substring {
-        private static final int BASE = 1_000_000_000 + 7;
-        private static final int FACTOR = 13;
+        private static final int BASE = Integer.MAX_VALUE;
+        private static final int FACTOR = Byte.MAX_VALUE;
         private final String string;
         private final int length;
         private final int maxOffset;
