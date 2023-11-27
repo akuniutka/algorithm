@@ -22,6 +22,8 @@ public class SequentialSearch {
     public static int indexOf(String substring, String string) {
         if (substring == null || string == null || substring.isEmpty()) {
             return -1;
+        } else if (substring.length() > string.length()) {
+            return -1;
         }
         for (int i = 0; i <= string.length() - substring.length(); ++i) {
             int j = 0;
