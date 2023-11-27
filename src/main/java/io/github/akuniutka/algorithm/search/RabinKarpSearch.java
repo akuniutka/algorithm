@@ -29,12 +29,9 @@ public class RabinKarpSearch {
         Substring sub1 = new Substring(substring);
         Substring sub2 = new Substring(string, substring.length());
         while (true) {
-            if (sub1.getHash() == sub2.getHash()) {
-                if (sub2.equals(sub1)) {
-                    return sub2.getOffset();
-                }
-            }
-            if (!sub2.canSlideToRight()) {
+            if (sub1.getHash() == sub2.getHash() && sub2.equals(sub1)) {
+                return sub2.getOffset();
+            } else if (!sub2.canSlideToRight()) {
                 return -1;
             }
             sub2.slideToRight();
