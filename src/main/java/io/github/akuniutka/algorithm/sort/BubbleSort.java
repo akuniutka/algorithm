@@ -2,23 +2,18 @@ package io.github.akuniutka.algorithm.sort;
 
 public class BubbleSort {
     public void sort(int[] array) {
-        int lastToCheck = array.length - 2;
-        int lastSwapped;
-        while (lastToCheck >= 0) {
-            lastSwapped = 0;
-            for (int i = 0; i <= lastToCheck; ++i) {
-                if (array[i] > array[i + 1]) {
-                    swap(array, i, i + 1);
-                    lastSwapped = i + 1;
+        int lastMoved = array.length;
+        do {
+            int i = lastMoved - 1;
+            lastMoved = 0;
+            for (int j = 0; j < i; ++j) {
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                    lastMoved = j + 1;
                 }
             }
-            lastToCheck = lastSwapped - 2;
-        }
-    }
-
-    private void swap(int[] array, int i, int j) {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        } while (lastMoved > 0);
     }
 }
