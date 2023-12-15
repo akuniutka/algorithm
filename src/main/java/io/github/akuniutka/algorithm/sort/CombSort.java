@@ -2,21 +2,28 @@ package io.github.akuniutka.algorithm.sort;
 
 public class CombSort {
     public void sort(int[] array) {
-        int shift = array.length;
+        int finish = array.length;
+        int step = array.length;
+        int lastMoved = array.length;
         do {
-            shift = shift * 1000 / 1247;
-            for (int i = 0; i + shift < array.length; ++i) {
-                if (array[i] > array[i + shift]) {
-                    swap(array, i, i + shift);
+            if (step > 7) {
+                step = (int) Math.rint(step / 1.247);
+            } else if (step > 1) {
+                --step;
+            } else {
+                finish = lastMoved;
+                lastMoved = 0;
+            }
+            for (int j = 0; j + step < finish; ++j) {
+                if (array[j] > array[j + step]) {
+                    int temp = array[j + step];
+                    array[j + step] = array[j];
+                    array[j] = temp;
+                    if (step == 1) {
+                        lastMoved = j + step;
+                    }
                 }
             }
-        } while (shift > 1);
-        (new BubbleSort()).sort(array);
-    }
-
-    private void swap(int[] array, int i, int j) {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        } while (step > 1 || lastMoved != 0);
     }
 }
