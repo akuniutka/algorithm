@@ -1,7 +1,7 @@
 package io.github.akuniutka.algorithm.sort;
 
 public class CombSort {
-    public void sort(int[] array) {
+    public static void sort(int[] array) {
         int finish = array.length;
         int step = array.length;
         int lastMoved = array.length;

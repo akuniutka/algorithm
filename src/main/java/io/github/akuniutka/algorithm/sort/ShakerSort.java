@@ -1,7 +1,7 @@
 package io.github.akuniutka.algorithm.sort;
 
 public class ShakerSort {
-    public void sort(int[] array) {
+    public static void sort(int[] array) {
         int start = array.length - 1;
         int lastMoved = -1;
         int step = -1;
