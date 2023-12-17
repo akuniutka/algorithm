@@ -17,12 +17,12 @@ public class TestData {
         return new TestArray(new int[]{value}, new int[]{value});
     }
 
-    public static TestArray getRandomArray(int max_size, int max_value) {
+    public static TestArray getRandomArray(int maxSize, int maxValue) {
         Random random = new Random();
-        int size = random.nextInt(max_size);
+        int size = random.nextInt(maxSize);
         int[] unsorted = new int[size];
         for (int i = 0; i < size; i++) {
-            unsorted[i] = random.nextInt(max_value);
+            unsorted[i] = random.nextInt(maxValue);
         }
         int[] sorted = Arrays.copyOf(unsorted, unsorted.length);
         Arrays.sort(sorted);
