@@ -1,7 +1,7 @@
 package io.github.akuniutka.algorithm.sort;
 
 public class BubbleSort {
-    public void sort(int[] array) {
+    public static void sort(int[] array) {
         int lastMoved = array.length;
         do {
             int i = lastMoved - 1;

@@ -1,7 +1,7 @@
 package io.github.akuniutka.algorithm.sort;
 
 public class InsertionSort {
-    public void sort(int[] array) {
+    public static void sort(int[] array) {
         for (int i = 1; i < array.length; ++i) {
             int temp = array[i];
             int j = i;
