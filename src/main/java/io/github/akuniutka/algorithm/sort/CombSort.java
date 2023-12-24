@@ -1,6 +1,6 @@
 package io.github.akuniutka.algorithm.sort;
 
-public class CombSort {
+public class CombSort extends AbstractSort {
     public static void sort(int[] array) {
         int finish = array.length;
         int step = array.length;
@@ -16,9 +16,7 @@ public class CombSort {
             }
             for (int j = 0; j + step < finish; ++j) {
                 if (array[j] > array[j + step]) {
-                    int temp = array[j + step];
-                    array[j + step] = array[j];
-                    array[j] = temp;
+                    swap(array, j, j + step);
                     if (step == 1) {
                         lastMoved = j + step;
                     }

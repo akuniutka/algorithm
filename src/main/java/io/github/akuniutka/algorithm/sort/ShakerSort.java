@@ -1,6 +1,6 @@
 package io.github.akuniutka.algorithm.sort;
 
-public class ShakerSort {
+public class ShakerSort extends AbstractSort {
     public static void sort(int[] array) {
         int start = array.length - 1;
         int lastMoved = -1;
@@ -12,9 +12,7 @@ public class ShakerSort {
             lastMoved = start;
             for (int j = start; Integer.signum(finish - j) == step; j += step) {
                 if (Integer.signum(array[j] - array[j + step]) == step) {
-                    int temp = array[j + step];
-                    array[j + step] = array[j];
-                    array[j] = temp;
+                    swap(array, j, j + step);
                     lastMoved = j + step;
                 }
             }

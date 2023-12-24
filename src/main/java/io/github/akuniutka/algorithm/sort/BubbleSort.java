@@ -1,6 +1,6 @@
 package io.github.akuniutka.algorithm.sort;
 
-public class BubbleSort {
+public class BubbleSort extends AbstractSort {
     public static void sort(int[] array) {
         int lastMoved = array.length;
         do {
@@ -8,9 +8,7 @@ public class BubbleSort {
             lastMoved = 0;
             for (int j = 0; j < i; ++j) {
                 if (array[j] > array[j + 1]) {
-                    int temp = array[j + 1];
-                    array[j + 1] = array[j];
-                    array[j] = temp;
+                    swap(array, j, j + 1);
                     lastMoved = j + 1;
                 }
             }
