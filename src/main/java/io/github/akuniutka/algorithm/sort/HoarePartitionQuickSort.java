@@ -1,6 +1,6 @@
 package io.github.akuniutka.algorithm.sort;
 
-public class QuickSort extends AbstractSort {
+public class HoarePartitionQuickSort extends AbstractSort {
     public static void sort(int[] array) {
         quickSort(array, 0, array.length - 1);
     }
