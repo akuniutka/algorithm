@@ -20,15 +20,14 @@ public class CountingSort {
         int[] buffer = new int[array.length];
         System.arraycopy(array, 0, buffer, 0, array.length);
         int[] count = new int[max - min + 1];
-        for (int j : buffer) {
-            ++count[j - min];
+        for (int i : buffer) {
+            ++count[i - min];
         }
         for (int i = 1; i < count.length; ++i) {
             count[i] += count[i - 1];
         }
         for (int i = buffer.length - 1; i >= 0; --i) {
-            array[count[buffer[i] - min] - 1] = buffer[i];
-            --count[buffer[i] - min];
+            array[--count[buffer[i] - min]] = buffer[i];
         }
     }
 }
