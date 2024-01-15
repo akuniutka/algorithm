@@ -2,14 +2,7 @@ package io.github.akuniutka.algorithm.dynamic;
 
 public class SimpleKnapsack {
     public static int maxWeight(int[] weights, int limit) {
-        if (limit < 0) {
-            throw new IllegalArgumentException("limit below zero");
-        }
-        for (int weight : weights) {
-            if (weight < 0) {
-                throw new IllegalArgumentException("weight below zero");
-            }
-        }
+        assertValues(weights, limit);
         boolean[][] state = new boolean[2][limit + 1];
         int current = 1;
         int previous = 0;
@@ -30,5 +23,16 @@ public class SimpleKnapsack {
             --j;
         }
         return j;
+    }
+
+    private static void assertValues(int[] weights, int limit) {
+        if (limit < 0) {
+            throw new IllegalArgumentException("limit below zero");
+        }
+        for (int weight : weights) {
+            if (weight < 0) {
+                throw new IllegalArgumentException("weight below zero");
+            }
+        }
     }
 }
