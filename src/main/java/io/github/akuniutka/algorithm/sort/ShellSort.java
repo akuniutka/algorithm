@@ -31,6 +31,9 @@ public class ShellSort {
         while (distance < threshold) {
             distance <<= 1;
         }
-        return distance - 1;
+        if (distance > 1) {
+            --distance;
+        }
+        return distance;
     }
 }
