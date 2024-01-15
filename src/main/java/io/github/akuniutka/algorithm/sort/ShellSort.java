@@ -16,24 +16,16 @@ public class ShellSort {
                 }
                 array[j] = temp;
             }
-            distance = (++distance >> 1) - 1;
+            distance = ++distance / 2 - 1;
         }
     }
 
     private static int distance(int length) {
-        int threshold = length;
-        if ((threshold & 1) == 0) {
-            threshold >>= 1;
-        } else {
-            threshold = (threshold >> 1) + 1;
-        }
+        int threshold = length / 2;
         int distance = 1;
-        while (distance < threshold) {
-            distance <<= 1;
+        while (distance <= threshold) {
+            distance *= 2;
         }
-        if (distance > 1) {
-            --distance;
-        }
-        return distance;
+        return distance - 1;
     }
 }
