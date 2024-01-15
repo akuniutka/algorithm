@@ -31,12 +31,12 @@ public class SimpleKnapsackTest {
     }
 
     @Test
-    void testMaxWeightWhenWeightsEmpty() {
+    void testMaxWeightWhenThereAreNoWeights() {
         assertEquals(0, maxWeight(new int[0], 10));
     }
 
     @Test
-    void testMaxWeightWhenAnswerIsEqualLimit() {
+    void testMaxWeightWhenAnswerEqualsLimit() {
         assertEquals(20, maxWeight(WEIGHTS, 20));
     }
 
