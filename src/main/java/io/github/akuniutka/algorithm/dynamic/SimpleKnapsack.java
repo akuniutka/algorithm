@@ -19,11 +19,9 @@ public class SimpleKnapsack {
             current = previous;
             previous = 1 - current;
             for (int j = 1; j <= limit; ++j) {
-                int k = j - weight;
-                if (k < 0) {
-                    state[current][j] = state[previous][j];
-                } else {
-                    state[current][j] = state[previous][j] || state[previous][k];
+                state[current][j] = state[previous][j];
+                if (j >= weight) {
+                    state[current][j] = state[current][j] || state[previous][j - weight];
                 }
             }
         }
