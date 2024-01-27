@@ -9,25 +9,28 @@ public class ThreeWayPartitionQuickSort extends AbstractSort {
         if (left >= right) {
             return;
         }
-        int[] partitions = partition(array, left, right);
-        sort(array, left, partitions[0]);
-        sort(array, partitions[1], right);
+        long parts = partition(array, left, right);
+        int i = (int) (parts >> 32);
+        int j = (int) parts;
+        sort(array, left, i);
+        sort(array, j, right);
     }
 
-    private static int[] partition(int[] array, int left, int right) {
+    private static long partition(int[] array, int left, int right) {
         int pivot = array[left + (right - left) / 2];
-        int leftPartition = left;
-        int rightPartition = right;
-        int j = left;
-        while (j <= rightPartition) {
-            if (array[j] < pivot) {
-                swap(array, j++, leftPartition++);
-            } else if (array[j] == pivot) {
-                ++j;
+        int less = left, greater = right;
+        int i = left;
+        while (i <= greater) {
+            if (array[i] < pivot) {
+                swap(array, i++, less++);
+            } else if (array[i] == pivot) {
+                ++i;
             } else {
-                swap(array, j, rightPartition--);
+                swap(array, i, greater--);
             }
         }
-        return new int[]{--leftPartition, ++rightPartition};
+        --less;
+        ++greater;
+        return (long) less << 32 | greater;
     }
 }
