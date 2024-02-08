@@ -8,7 +8,7 @@ package io.github.akuniutka.algorithm.search;
  * @version 1.0
  * @since 1.0
  */
-public class SequentialSearch {
+public class SequentialSearch extends AbstractSearch {
 
     /**
      * Returns the index within {@code string} of the first occurrence of
@@ -20,9 +20,12 @@ public class SequentialSearch {
      * {@code -1} if there is no such occurrence.
      */
     public static int indexOf(String substring, String string) {
-        if (substring == null || string == null || substring.isEmpty()) {
-            return -1;
-        } else if (substring.length() > string.length()) {
+//        if (substring == null || string == null || substring.isEmpty()) {
+//            return -1;
+//        } else if (substring.length() > string.length()) {
+//            return -1;
+//        }
+        if (!areCorrect(substring, string)) {
             return -1;
         }
         for (int i = 0; i <= string.length() - substring.length(); ++i) {
