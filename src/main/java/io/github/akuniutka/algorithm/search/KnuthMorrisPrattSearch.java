@@ -31,7 +31,8 @@ public class KnuthMorrisPrattSearch extends AbstractSearch {
                 k = prefixes[k - 1];
             }
             if (string.charAt(i) == substring.charAt(k)) {
-                if (++k == substring.length()) {
+                k++;
+                if (k == substring.length()) {
                     return i - k + 1;
                 }
             }
