@@ -20,11 +20,6 @@ public class SequentialSearch extends AbstractSearch {
      * {@code -1} if there is no such occurrence.
      */
     public static int indexOf(String substring, String string) {
-//        if (substring == null || string == null || substring.isEmpty()) {
-//            return -1;
-//        } else if (substring.length() > string.length()) {
-//            return -1;
-//        }
         if (!areCorrect(substring, string)) {
             return -1;
         }
