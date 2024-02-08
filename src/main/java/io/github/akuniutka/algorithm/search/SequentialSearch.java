@@ -14,8 +14,8 @@ public class SequentialSearch extends AbstractSearch {
      * Returns the index within {@code string} of the first occurrence of
      * {@code substring}.
      *
-     * @param substring  the string being searched for
-     * @param string     the string tested whether it contains {@code substring}
+     * @param substring the string being searched for
+     * @param string    the string tested whether it contains {@code substring}
      * @return the index of the first occurrence of {@code substring}, or
      * {@code -1} if there is no such occurrence.
      */

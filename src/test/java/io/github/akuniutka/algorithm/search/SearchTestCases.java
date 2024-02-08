@@ -6,10 +6,10 @@ import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public abstract class TestCases {
+public abstract class SearchTestCases {
     private final BiFunction<String, String, Integer> indexOf;
 
-    protected TestCases(BiFunction<String, String, Integer> indexOf) {
+    protected SearchTestCases(BiFunction<String, String, Integer> indexOf) {
         this.indexOf = indexOf;
     }
 
