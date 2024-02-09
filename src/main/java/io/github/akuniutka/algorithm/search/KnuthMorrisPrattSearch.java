@@ -46,7 +46,7 @@ public class KnuthMorrisPrattSearch extends AbstractSearch {
      * A value of prefix function for string S is the length of the longest
      * prefix of S (excluding the prefix equal to S) that at the same time
      * is a suffix of S. A value at index {@code i} in the array returned
-     * ia a value of prefix function for {@code string.substring(0, i + 1}.
+     * ia a value of prefix function for {@code string.substring(0, i + 1)}.
      *
      * @param string the string for substrings of which prefix function
      *               to be calculated
