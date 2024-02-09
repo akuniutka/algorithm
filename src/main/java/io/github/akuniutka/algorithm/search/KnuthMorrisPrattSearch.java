@@ -41,17 +41,17 @@ public class KnuthMorrisPrattSearch extends AbstractSearch {
     }
 
     /**
-     * Returns values of prefix function calculated for every {@code
-     * string.substring(0, i)} where {@code i} goes from {@code 1} to
-     * {@code string.length()}. Prefix function of string S is a length
-     * of the longest prefix (excluding prefix equal to S) that at the
-     * same time is a suffix of S.
+     * Returns array of prefix function values calculated for substrings
+     * of {@code string} which start at index {@code 0} in {@code string}.
+     * A value of prefix function for string S is the length of the longest
+     * prefix of S (excluding the prefix equal to S) that at the same time
+     * is a suffix of S. A value at index {@code i} in the array returned
+     * ia a value of prefix function for {@code string.substring(0, i + 1}.
      *
-     * @param string the string for substring of which prefix function
+     * @param string the string for substrings of which prefix function
      *               to be calculated
-     * @return the array of values of prefix function for all substrings
-     * of {@code string} which start at position {@code 0} in {@code
-     * string}
+     * @return the array where value at index {@code i} is a value of
+     * prefix function for {@code string.substring(0, i + 1}.
      */
     private static int[] prefixes(String string) {
         int[] prefixes = new int[string.length()];
