@@ -51,7 +51,7 @@ public class KnuthMorrisPrattSearch extends AbstractSearch {
      * @param string the string for substrings of which prefix function
      *               to be calculated
      * @return the array where value at index {@code i} is a value of
-     * prefix function for {@code string.substring(0, i + 1}.
+     * prefix function for {@code string.substring(0, i + 1)}.
      */
     private static int[] prefixes(String string) {
         int[] prefixes = new int[string.length()];
