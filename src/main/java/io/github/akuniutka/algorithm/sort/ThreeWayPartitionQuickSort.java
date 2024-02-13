@@ -18,19 +18,18 @@ public class ThreeWayPartitionQuickSort extends AbstractSort {
 
     private static long partition(int[] array, int left, int right) {
         int pivot = array[left + (right - left) / 2];
-        int less = left, greater = right;
         int i = left;
-        while (i <= greater) {
+        while (i <= right) {
             if (array[i] < pivot) {
-                swap(array, i++, less++);
+                swap(array, i++, left++);
             } else if (array[i] == pivot) {
                 ++i;
             } else {
-                swap(array, i, greater--);
+                swap(array, i, right--);
             }
         }
-        --less;
-        ++greater;
-        return (long) less << 32 | greater;
+        --left;
+        ++right;
+        return (long) left << 32 | right;
     }
 }
